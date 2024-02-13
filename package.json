@@ -1,5 +1,5 @@
 {
-	"name": "scui",
+	"name": "soeasyeasy",
 	"version": "1.6.9",
 	"private": true,
 	"scripts": {
@@ -68,5 +68,16 @@
 		"last 2 versions",
 		"not dead",
 		"not ie 11"
-	]
+	],
+	"pnpm": {
+		"ignoredBuiltDependencies": [
+			"core-js",
+			"es5-ext",
+			"vue-demi",
+			"yorkie"
+		],
+		"onlyBuiltDependencies": [
+			"core-js"
+		]
+	}
 }
