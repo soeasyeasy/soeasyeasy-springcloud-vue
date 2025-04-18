@@ -152,11 +152,12 @@
 			//加载树数据
 			async getGroup(){
 				this.showGrouploading = true;
-				var res = await this.$API.system.dept.list.get();
+				// var res = await this.$API.system.dept.list.get();
+				// var res=null
 				this.showGrouploading = false;
-				var allNode ={id: '', label: '所有'}
-				res.data.unshift(allNode);
-				this.group = res.data;
+				// var allNode ={id: '', label: '所有'}
+				// res.data.unshift(allNode);
+				this.group = null;
 			},
 			//树过滤
 			groupFilterNode(value, data){

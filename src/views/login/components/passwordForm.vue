@@ -37,7 +37,7 @@
 				userType: 'admin',
 				form: {
 					user: "admin",
-					password: "admin",
+					password: "123456",
 					autologin: false
 				},
 				rules: {
@@ -55,7 +55,7 @@
 			userType(val){
 				if(val == 'admin'){
 					this.form.user = 'admin'
-					this.form.password = 'admin'
+					this.form.password = '123456'
 				}else if(val == 'user'){
 					this.form.user = 'user'
 					this.form.password = 'user'
@@ -72,23 +72,25 @@
 				if(!validate){ return false }
 
 				this.islogin = true
-				// var data = {
-				// 	username: this.form.user,
-				// 	password: this.$TOOL.crypto.MD5(this.form.password)
-				// }
-				// //获取token
-				// var user = await this.$API.auth.token.post(data)
-				// if(user.code == 200){
-				// 	this.$TOOL.cookie.set("TOKEN", user.data.token, {
-				// 		expires: this.form.autologin? 24*60*60 : 0
-				// 	})
-				// 	this.$TOOL.data.set("USER_INFO", user.data.userInfo)
-				// }else{
-				// 	this.islogin = false
-				// 	this.$message.warning(user.message)
-				// 	return false
-				// }
-				// //获取菜单
+				var data = {
+					userName: this.form.user,
+					// password: this.$TOOL.crypto.MD5(this.form.password)
+					pwd: this.form.password,
+					loginType: "userName"
+				}
+				//获取token
+				var user = await this.$API.auth.token.post(data)
+				if(user.code == 200){
+					this.$TOOL.cookie.set("TOKEN", user.data.token, {
+						expires: this.form.autologin? 24*60*60 : 0
+					})
+					this.$TOOL.data.set("USER_INFO", user.data)
+				}else{
+					this.islogin = false
+					this.$message.warning(user.msg)
+					return false
+				}
+				//获取菜单
 				// var menu = null
 				// if(this.form.user == 'admin'){
 				// 	menu = await this.$API.system.menu.myMenus.get()
@@ -106,20 +108,16 @@
 				// 	}
 				// 	// 动态路由
 				// 	// this.$TOOL.data.set("MENU", menu.data.menu)
-					// this.$TOOL.data.set("MENU", "")
-					// this.$TOOL.data.set("PERMISSIONS", menu.data.permissions)
-					// this.$TOOL.data.set("DASHBOARDGRID", menu.data.dashboardGrid)
+				// 	this.$TOOL.data.set("MENU", "")
+				// 	this.$TOOL.data.set("PERMISSIONS", menu.data.permissions)
+				// 	this.$TOOL.data.set("DASHBOARDGRID", menu.data.dashboardGrid)
 				// }else{
 				// 	this.islogin = false
 				// 	this.$message.warning(menu.message)
 				// 	return false
 				// }
 
-					this.$TOOL.cookie.set("TOKEN", "test", {
-						expires: this.form.autologin? 24*60*60 : 0
-					})
-					// this.$TOOL.data.set("USER_INFO", user.data.userInfo)
-					this.$TOOL.data.set("MENU", "")
+
 
 				this.$router.replace({
 					path: '/'
