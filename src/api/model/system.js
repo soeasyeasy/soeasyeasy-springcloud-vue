@@ -61,7 +61,7 @@ export default {
 	},
 	user: {
 		list: {
-			url: `${config.API_URL}/user/page`,
+			url: `${config.API_URL}/user/userinfo/page`,
 			name: "获取用户列表",
 			get: async function (params) {
 				return await http.post(this.url, params);
