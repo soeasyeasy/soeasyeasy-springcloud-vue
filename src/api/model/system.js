@@ -67,7 +67,22 @@ export default {
 				return await http.post(this.url, params);
 			},
 		},
+		edit: {
+			url: `${config.API_URL}/user/userinfo/update`,
+			name: "更新用户信息",
+			post: async function (params) {
+				return await http.post(this.url, params);
+			},
+		},
+		delete: {
+			url: `${config.API_URL}/user/userinfo/`,
+			name: "更新用户信息",
+			delete: async function (params) {
+				return await http.delete(this.url + params);
+			},
+		},
 	},
+
 	app: {
 		list: {
 			url: `${config.API_URL}/system/app/list`,

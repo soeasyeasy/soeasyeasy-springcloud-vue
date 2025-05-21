@@ -1,6 +1,6 @@
 <template>
 	<el-container>
-		<el-aside width="200px" v-loading="showGrouploading">
+		<!-- <el-aside width="200px" v-loading="showGrouploading">
 			<el-container>
 				<el-header>
 					<el-input placeholder="输入关键字进行过滤" v-model="groupFilterText" clearable></el-input>
@@ -9,7 +9,7 @@
 					<el-tree ref="group" class="menu" node-key="id" :data="group" :current-node-key="''" :highlight-current="true" :expand-on-click-node="false" :filter-node-method="groupFilterNode" @node-click="groupClick"></el-tree>
 				</el-main>
 			</el-container>
-		</el-aside>
+		</el-aside> -->
 		<el-container>
 				<el-header>
 					<div class="left-panel">
@@ -35,9 +35,23 @@
 							</template>
 						</el-table-column>
 						<el-table-column label="登录账号" prop="userName" width="150" sortable='custom' column-key="filterUserName" :filters="[{text: '系统账号', value: '1'}, {text: '普通账号', value: '0'}]"></el-table-column>
-						<el-table-column label="姓名" prop="name" width="150" sortable='custom'></el-table-column>
+						<el-table-column label="姓名" prop="name" width="80" sortable='custom'></el-table-column>
+						<el-table-column label="性别" prop="sex" width="80" sortable='custom'>
+							<template #default="scope">
+								<span v-if="scope.row.sex==0">男</span>
+								<span v-else >女</span>
+							</template>
+						</el-table-column>
+						<el-table-column label="手机号" prop="phone" width="120" sortable='custom'></el-table-column>
+						<el-table-column label="邮箱" prop="email" width="200" sortable='custom'></el-table-column>
+						<el-table-column label="状态" prop="status" width="80" sortable='custom'>
+							<template #default="scope">
+								<span v-if="scope.row.status==0" style="color: #67C23A;"><el-icon><el-icon-success-filled /></el-icon></span>
+								<span v-else style="color: #F56C6C;"><el-icon><el-icon-circle-close-filled /></el-icon></span>
+							</template>
+						</el-table-column>
+						<el-table-column label="加入时间" prop="createTime" width="170" sortable='custom'></el-table-column>
 						<el-table-column label="所属角色" prop="groupName" width="200" sortable='custom'></el-table-column>
-						<el-table-column label="加入时间" prop="date" width="170" sortable='custom'></el-table-column>
 						<el-table-column label="操作" fixed="right" align="right" width="160">
 							<template #default="scope">
 								<el-button-group>
@@ -90,7 +104,7 @@
 			}
 		},
 		mounted() {
-			this.getGroup()
+			// this.getGroup()
 		},
 		methods: {
 			//添加
@@ -116,8 +130,8 @@
 			},
 			//删除
 			async table_del(row, index){
-				var reqData = {id: row.id}
-				var res = await this.$API.demo.post.post(reqData);
+				// var reqData = {id: row.id}
+				var res = await this.$API.system.user.delete.delete(row.id);
 				if(res.code == 200){
 					//这里选择刷新整个表格 OR 插入/编辑现有表格数据
 					this.$refs.table.tableData.splice(index, 1);

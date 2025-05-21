@@ -1,5 +1,5 @@
 <template>
-	<el-dialog :title="titleMap[mode]" v-model="visible" :width="500" destroy-on-close @closed="$emit('closed')">
+	<el-dialog :title="titleMap[mode]" v-model="visible" :width="800" destroy-on-close @closed="$emit('closed')">
 		<el-form :model="form" :rules="rules" :disabled="mode=='show'" ref="dialogForm" label-width="100px" label-position="left">
 			<el-form-item label="头像" prop="avatar">
 				<sc-upload v-model="form.avatar" title="上传头像"></sc-upload>
@@ -9,6 +9,21 @@
 			</el-form-item>
 			<el-form-item label="姓名" prop="name">
 				<el-input v-model="form.name" placeholder="请输入完整的真实姓名" clearable></el-input>
+			</el-form-item>
+			<el-form-item label="性别" prop="sex">
+				<el-radio-group v-model="form.sex">
+					<el-radio :label="'0'">男</el-radio>
+					<el-radio :label="'1'">女</el-radio>
+				</el-radio-group>
+			</el-form-item>
+			<el-form-item label="手机号" prop="phone">
+				<el-input v-model="form.phone" placeholder="请输入完整真实的手机号" clearable></el-input>
+			</el-form-item>
+			<el-form-item label="邮箱" prop="email">
+				<el-input v-model="form.email" placeholder="请输入完整真实的邮箱" clearable></el-input>
+			</el-form-item>
+			<el-form-item label="状态" prop="status">
+					<el-switch v-model="form.status" active-value="0" inactive-value="1"></el-switch>
 			</el-form-item>
 			<template v-if="mode=='add'">
 				<el-form-item label="登录密码" prop="password">
@@ -51,6 +66,10 @@
 				form: {
 					id:"",
 					userName: "",
+					sex:"",
+					phone:"",
+					email:"",
+					status:"",
 					avatar: "",
 					name: "",
 					dept: "",
@@ -59,7 +78,7 @@
 				//验证规则
 				rules: {
 					avatar:[
-						{required: true, message: '请上传头像'}
+						// {required: true, message: '请上传头像'}
 					],
 					userName: [
 						{required: true, message: '请输入登录账号'}
@@ -68,7 +87,7 @@
 						{required: true, message: '请输入真实姓名'}
 					],
 					password: [
-						{required: true, message: '请输入登录密码'},
+						// {required: true, message: '请输入登录密码'},
 						{validator: (rule, value, callback) => {
 							if (this.form.password2 !== '') {
 								this.$refs.dialogForm.validateField('password2');
@@ -77,7 +96,7 @@
 						}}
 					],
 					password2: [
-						{required: true, message: '请再次输入密码'},
+						// {required: true, message: '请再次输入密码'},
 						{validator: (rule, value, callback) => {
 							if (value !== this.form.password) {
 								callback(new Error('两次输入密码不一致!'));
@@ -87,10 +106,10 @@
 						}}
 					],
 					dept: [
-						{required: true, message: '请选择所属部门'}
+						// {required: true, message: '请选择所属部门'}
 					],
 					group: [
-						{required: true, message: '请选择所属角色', trigger: 'change'}
+						// {required: true, message: '请选择所属角色', trigger: 'change'}
 					]
 				},
 				//所需数据选项
@@ -108,8 +127,8 @@
 			}
 		},
 		mounted() {
-			this.getGroup()
-			this.getDept()
+			// this.getGroup()
+			// this.getDept()
 		},
 		methods: {
 			//显示
@@ -132,7 +151,7 @@
 				this.$refs.dialogForm.validate(async (valid) => {
 					if (valid) {
 						this.isSaveing = true;
-						var res = await this.$API.demo.post.post(this.form);
+						var res = await this.$API.system.user.edit.post(this.form);
 						this.isSaveing = false;
 						if(res.code == 200){
 							this.$emit('success', this.form, this.mode)
@@ -148,15 +167,19 @@
 			},
 			//表单注入数据
 			setData(data){
-				this.form.id = data.id
-				this.form.userName = data.userName
-				this.form.avatar = data.avatar
-				this.form.name = data.name
-				this.form.group = data.group
-				this.form.dept = data.dept
+				// this.form.id = data.id
+				// this.form.userName = data.userName
+				// this.form.avatar = data.avatar
+				// this.form.name = data.name
+				// this.form.sex=data.sex
+				// this.form.phone=data.phone
+				// this.form.email=data.email
+				// this.form.status=data.status
+				// this.form.group = data.group
+				// this.form.dept = data.dept
 
 				//可以和上面一样单个注入，也可以像下面一样直接合并进去
-				//Object.assign(this.form, data)
+				Object.assign(this.form, data)
 			}
 		}
 	}
