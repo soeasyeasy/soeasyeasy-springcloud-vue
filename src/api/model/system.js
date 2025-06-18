@@ -43,10 +43,17 @@ export default {
 	},
 	role: {
 		list: {
-			url: `${config.API_URL}/system/role/list2`,
+			url: `${config.API_URL}/system/role/page`,
 			name: "获取角色列表",
 			get: async function (params) {
-				return await http.get(this.url, params);
+				return await http.post(this.url, params);
+			},
+		},
+		edit: {
+			url: `${config.API_URL}/system/role/update`,
+			name: "更新角色信息",
+			post: async function (params) {
+				return await http.post(this.url, params);
 			},
 		},
 	},
@@ -61,22 +68,22 @@ export default {
 	},
 	user: {
 		list: {
-			url: `${config.API_URL}/user/userinfo/page`,
+			url: `${config.API_URL}/system/userinfo/page`,
 			name: "获取用户列表",
 			get: async function (params) {
 				return await http.post(this.url, params);
 			},
 		},
 		edit: {
-			url: `${config.API_URL}/user/userinfo/update`,
+			url: `${config.API_URL}/system/userinfo/update`,
 			name: "更新用户信息",
 			post: async function (params) {
 				return await http.post(this.url, params);
 			},
 		},
 		delete: {
-			url: `${config.API_URL}/user/userinfo/`,
-			name: "更新用户信息",
+			url: `${config.API_URL}/system/userinfo/`,
+			name: "删除用户信息",
 			delete: async function (params) {
 				return await http.delete(this.url + params);
 			},

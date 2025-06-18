@@ -1,20 +1,20 @@
 <template>
 	<el-dialog :title="titleMap[mode]" v-model="visible" :width="500" destroy-on-close @closed="$emit('closed')">
 		<el-form :model="form" :rules="rules" :disabled="mode=='show'" ref="dialogForm" label-width="100px" label-position="left">
-			<el-form-item label="角色名称" prop="label">
-				<el-input v-model="form.label" clearable></el-input>
+			<el-form-item label="角色名称" prop="roleName">
+				<el-input v-model="form.roleName" clearable></el-input>
 			</el-form-item>
-			<el-form-item label="角色别名" prop="alias">
-				<el-input v-model="form.alias" clearable></el-input>
+			<el-form-item label="角色code" prop="roleCode">
+				<el-input v-model="form.roleCode" clearable></el-input>
 			</el-form-item>
 			<el-form-item label="排序" prop="sort">
 				<el-input-number v-model="form.sort" controls-position="right" :min="1" style="width: 100%;"></el-input-number>
 			</el-form-item>
-			<el-form-item label="是否有效" prop="status">
+			<el-form-item label="状态" prop="status">
 				<el-switch v-model="form.status" active-value="1" inactive-value="0"></el-switch>
 			</el-form-item>
-			<el-form-item label="备注" prop="remark">
-				<el-input v-model="form.remark" clearable type="textarea"></el-input>
+			<el-form-item label="描述" prop="description">
+				<el-input v-model="form.description" clearable type="textarea"></el-input>
 			</el-form-item>
 		</el-form>
 		<template #footer>
@@ -40,22 +40,22 @@
 				//表单数据
 				form: {
 					id:"",
-					label: "",
-					alias: "",
+					roleName: "",
+					roleCode: "",
 					sort: 1,
 					status: 1,
-					remark: ""
+					description: ""
 				},
 				//验证规则
 				rules: {
 					sort: [
 						{required: true, message: '请输入排序', trigger: 'change'}
 					],
-					label: [
+					roleName: [
 						{required: true, message: '请输入角色名称'}
 					],
-					alias: [
-						{required: true, message: '请输入角色别名'}
+					roleCode: [
+						{required: true, message: '请输入角色code'}
 					]
 				}
 			}
@@ -75,7 +75,7 @@
 				this.$refs.dialogForm.validate(async (valid) => {
 					if (valid) {
 						this.isSaveing = true;
-						var res = await this.$API.demo.post.post(this.form);
+						var res = await this.$API.system.role.edit.post(this.form);
 						this.isSaveing = false;
 						if(res.code == 200){
 							this.$emit('success', this.form, this.mode)
