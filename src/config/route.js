@@ -101,6 +101,16 @@ const routes = [
 				component: "setting/role",
 			},
 			{
+				path: "/setting/api",
+				name: "api",
+				meta: {
+					title: "接口管理",
+					icon: "el-icon-notebook",
+					type: "api",
+				},
+				component: "setting/api",
+			},
+			{
 				path: "/setting/dept",
 				name: "dept",
 				meta: {

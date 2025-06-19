@@ -2,6 +2,70 @@ import config from "@/config";
 import http from "@/utils/request";
 
 export default {
+	role: {
+		list: {
+			url: `${config.API_URL}/system/role/page`,
+			name: "获取角色列表",
+			get: async function (params) {
+				return await http.post(this.url, params);
+			},
+		},
+		edit: {
+			url: `${config.API_URL}/system/role/update`,
+			name: "更新角色信息",
+			post: async function (params) {
+				return await http.post(this.url, params);
+			},
+		},
+	},
+	api: {
+		list: {
+			url: `${config.API_URL}/system/api/page`,
+			name: "获取api列表",
+			get: async function (params) {
+				return await http.post(this.url, params);
+			},
+		},
+		edit: {
+			url: `${config.API_URL}/system/api/update`,
+			name: "更新api信息",
+			post: async function (params) {
+				return await http.post(this.url, params);
+			},
+		},
+	},
+	dept: {
+		list: {
+			url: `${config.API_URL}/system/dept/list`,
+			name: "获取部门列表",
+			get: async function (params) {
+				return await http.get(this.url, params);
+			},
+		},
+	},
+	user: {
+		list: {
+			url: `${config.API_URL}/system/userinfo/page`,
+			name: "获取用户列表",
+			get: async function (params) {
+				return await http.post(this.url, params);
+			},
+		},
+		edit: {
+			url: `${config.API_URL}/system/userinfo/update`,
+			name: "更新用户信息",
+			post: async function (params) {
+				return await http.post(this.url, params);
+			},
+		},
+		delete: {
+			url: `${config.API_URL}/system/userinfo/`,
+			name: "删除用户信息",
+			delete: async function (params) {
+				return await http.delete(this.url + params);
+			},
+		},
+	},
 	menu: {
 		myMenus: {
 			url: `${config.API_URL}/system/menu/my/1.6.1`,
@@ -41,55 +105,6 @@ export default {
 			},
 		},
 	},
-	role: {
-		list: {
-			url: `${config.API_URL}/system/role/page`,
-			name: "获取角色列表",
-			get: async function (params) {
-				return await http.post(this.url, params);
-			},
-		},
-		edit: {
-			url: `${config.API_URL}/system/role/update`,
-			name: "更新角色信息",
-			post: async function (params) {
-				return await http.post(this.url, params);
-			},
-		},
-	},
-	dept: {
-		list: {
-			url: `${config.API_URL}/system/dept/list`,
-			name: "获取部门列表",
-			get: async function (params) {
-				return await http.get(this.url, params);
-			},
-		},
-	},
-	user: {
-		list: {
-			url: `${config.API_URL}/system/userinfo/page`,
-			name: "获取用户列表",
-			get: async function (params) {
-				return await http.post(this.url, params);
-			},
-		},
-		edit: {
-			url: `${config.API_URL}/system/userinfo/update`,
-			name: "更新用户信息",
-			post: async function (params) {
-				return await http.post(this.url, params);
-			},
-		},
-		delete: {
-			url: `${config.API_URL}/system/userinfo/`,
-			name: "删除用户信息",
-			delete: async function (params) {
-				return await http.delete(this.url + params);
-			},
-		},
-	},
-
 	app: {
 		list: {
 			url: `${config.API_URL}/system/app/list`,
