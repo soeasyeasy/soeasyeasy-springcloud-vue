@@ -76,7 +76,7 @@
 					userName: this.form.user,
 					// password: this.$TOOL.crypto.MD5(this.form.password)
 					pwd: this.form.password,
-					loginType: "userName"
+					loginType: "password"
 				}
 				//获取token
 				var user = await this.$API.auth.token.post(data)

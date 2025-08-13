@@ -1,18 +1,18 @@
 <template>
 	<el-container>
-		<!-- <el-header>
-			<div class="left-panel">
+		<el-header>
+			<!-- <div class="left-panel">
 				<el-button type="primary" icon="el-icon-plus" @click="add"></el-button>
 				<el-button type="danger" plain icon="el-icon-delete" :disabled="selection.length==0" @click="batch_del"></el-button>
 				<el-button type="primary" plain :disabled="selection.length!=1" @click="permission">权限设置</el-button>
-			</div>
+			</div> -->
 			<div class="right-panel">
 				<div class="right-panel-search">
-					<el-input v-model="search.keyword" placeholder="角色名称" clearable></el-input>
+					<el-input v-model="search.keyword" placeholder="接口搜索" clearable></el-input>
 					<el-button type="primary" icon="el-icon-search" @click="upsearch"></el-button>
 				</div>
 			</div>
-		</el-header> -->
+		</el-header>
 		<el-main class="nopadding">
 			<scTable ref="table" :apiObj="apiObj" row-key="id" @selection-change="selectionChange" stripe>
 				<el-table-column type="selection" width="50"></el-table-column>
@@ -20,16 +20,16 @@
 				<el-table-column label="请求方式" prop="httpMethod" width="150"></el-table-column>
 				<el-table-column label="路径" prop="path" width="150"></el-table-column>
 				<el-table-column label="方法名称" prop="methodName" width="150"></el-table-column>
-				<el-table-column label="方法描述" prop="methodDescription" width="150"></el-table-column>
-				<el-table-column label="接口描述" prop="description" width="150"></el-table-column>
+				<el-table-column label="方法描述" prop="methodDescription" width="200"></el-table-column>
+				<el-table-column label="接口描述" prop="description" width="300"></el-table-column>
 				<el-table-column label="状态" prop="status" width="150" sortable='custom'>
 						<template #default="scope">
-							<span v-if="scope.row.status==0" style="color: #67C23A;"><el-icon><el-icon-success-filled /></el-icon></span>
+							<span v-if="scope.row.status==1" style="color: #67C23A;"><el-icon><el-icon-success-filled /></el-icon></span>
 							<span v-else style="color: #F56C6C;"><el-icon><el-icon-circle-close-filled /></el-icon></span>
 						</template>
 				</el-table-column>
-				<el-table-column label="创建时间" prop="createTime" width="180"></el-table-column>
-				<el-table-column label="创建时间" prop="updateTime" width="180"></el-table-column>
+				<el-table-column label="创建时间" prop="createTime" width="150"></el-table-column>
+				<el-table-column label="创建时间" prop="updateTime" width="150"></el-table-column>
 				<el-table-column label="操作" fixed="right" align="right" width="170">
 					<template #default="scope">
 						<el-button-group>
@@ -68,7 +68,7 @@
 					save: false,
 					permission: false
 				},
-				apiObj: this.$API.system.api.list,
+				apiObj: this.$API.system.api.page,
 				selection: [],
 				search: {
 					keyword: null
@@ -144,7 +144,7 @@
 			},
 			//搜索
 			upsearch(){
-
+			this.$refs.table.upData(this.search)
 			},
 			//根据ID获取树结构
 			filterTree(id){

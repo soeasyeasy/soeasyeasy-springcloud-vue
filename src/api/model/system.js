@@ -3,7 +3,7 @@ import http from "@/utils/request";
 
 export default {
 	role: {
-		list: {
+		page: {
 			url: `${config.API_URL}/system/role/page`,
 			name: "获取角色列表",
 			get: async function (params) {
@@ -19,7 +19,7 @@ export default {
 		},
 	},
 	api: {
-		list: {
+		page: {
 			url: `${config.API_URL}/system/api/page`,
 			name: "获取api列表",
 			get: async function (params) {
@@ -44,7 +44,7 @@ export default {
 		},
 	},
 	user: {
-		list: {
+		page: {
 			url: `${config.API_URL}/system/userinfo/page`,
 			name: "获取用户列表",
 			get: async function (params) {

@@ -186,6 +186,7 @@
 
 				try {
 					var res = await this.apiObj.get(reqData);
+					console.log("分页返回数据"+res);
 				}catch(error){
 					this.loading = false;
 					this.emptyText = error.statusText;
@@ -193,6 +194,7 @@
 				}
 				try {
 					var response = config.parseData(res);
+
 				}catch(error){
 					this.loading = false;
 					this.emptyText = "数据格式错误";

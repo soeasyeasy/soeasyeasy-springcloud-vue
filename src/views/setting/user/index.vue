@@ -91,7 +91,7 @@
 				showGrouploading: false,
 				groupFilterText: '',
 				group: [],
-				apiObj: this.$API.system.user.list,
+				apiObj: this.$API.system.user.page,
 				selection: [],
 				search: {
 					name: null

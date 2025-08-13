@@ -64,6 +64,29 @@
 			async login(){
 				var validate = await this.$refs.loginForm.validate().catch(()=>{})
 				if(!validate){ return false }
+				this.islogin = true
+				var data = {
+					phone: this.form.phone,
+					code: this.form.yzm,
+					loginType: "mobile"
+				}
+				//获取token
+				var user = await this.$API.auth.token.post(data)
+				if(user.code == 200){
+					this.$TOOL.cookie.set("TOKEN", user.data.token, {
+						expires: this.form.autologin? 24*60*60 : 0
+					})
+					this.$TOOL.data.set("USER_INFO", user.data)
+				}else{
+					this.islogin = false
+					this.$message.warning(user.msg)
+					return false
+				}
+				this.$router.replace({
+					path: '/'
+				})
+				this.$message.success("Login Success 登录成功")
+				this.islogin = false
 			}
 		}
 	}

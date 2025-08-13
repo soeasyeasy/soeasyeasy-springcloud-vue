@@ -68,7 +68,7 @@
 					save: false,
 					permission: false
 				},
-				apiObj: this.$API.system.role.list,
+				apiObj: this.$API.system.role.page,
 				selection: [],
 				search: {
 					keyword: null
