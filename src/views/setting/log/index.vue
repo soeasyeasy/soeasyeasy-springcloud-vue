@@ -32,8 +32,10 @@
 								</template>
 </el-table-column> -->
 							<el-table-column label="#" type="index" width="50"></el-table-column>
-							<el-table-column label="ID" prop="traceId" width="250"></el-table-column>
-							<el-table-column label="类名" prop="className" width="300"></el-table-column>
+							<el-table-column label="ID" prop="traceId" width="280"
+								show-overflow-tooltip="false"></el-table-column>
+							<el-table-column label="类名" prop="className" width="320"
+								show-overflow-tooltip="false"></el-table-column>
 							<el-table-column label="请求接口" prop="requestUri" width="200"></el-table-column>
 							<el-table-column label="请求方法" prop="methodName" width="100"></el-table-column>
 							<el-table-column label="请求方式" prop="method" width="100"></el-table-column>
